@@ -4,22 +4,22 @@ export SUBMIT_NAME="v_8026_0_4"
 
 export PANDA="${CMSSW_BASE}/src/PandaAnalysis"
 export PANDA_CFG="http://t3serv001.mit.edu/~snarayan/histcatalog/20170316.cfg"
-export PANDA_FLATDIR="/uscms_data/d3/matteoc/panda/"${SUBMIT_NAME}"/flat/"
+export PANDA_FLATDIR="/uscms_data/d3/shoh/panda/"${SUBMIT_NAME}"/flat/"
 #export PANDA_FLATDIR="/data/t3home000/mcremone/lpc/jorgem/panda/"${SUBMIT_NAME}"/flat/control/"                                                                                                            
 mkdir -p $PANDA_FLATDIR
 
 #export SUBMIT_TMPL="skim_monojet_tmpl.py" ####
 export SUBMIT_TMPL="skim_monoh_tmpl.py"
                                                                                                                                             
-export SUBMIT_WORKDIR="/uscms_data/d3/matteoc/condor/"${SUBMIT_NAME}"/work/"
-export SUBMIT_LOGDIR="/uscms_data/d3/matteoc/condor/"${SUBMIT_NAME}"/logs/"
-export SUBMIT_OUTDIR="/uscms_data/d3/matteoc/panda/"${SUBMIT_NAME}"/batch/"
+export SUBMIT_WORKDIR="/uscms_data/d3/shoh/condor/"${SUBMIT_NAME}"/work/"
+export SUBMIT_LOGDIR="/uscms_data/d3/shoh/condor/"${SUBMIT_NAME}"/logs/"
+export SUBMIT_OUTDIR="/uscms_data/d3/shoh/panda/"${SUBMIT_NAME}"/batch/"
 
-export SKIM_CFGDIR="/uscms_data/d3/matteoc/skim/configs"
+export SKIM_CFGDIR="/uscms_data/d3/shoh/skim/configs"
 
-export SKIM_MONOJET_FLATDIR="/uscms_data/d3/matteoc/skim/"${SUBMIT_NAME}"/monojet/"
-export SKIM_MONOHIGGS_FLATDIR="/uscms_data/d3/matteoc/skim/"${SUBMIT_NAME}"/monohiggs_boosted/"
-export SKIM_MONOHIGGS_RESOLVED_FLATDIR="/uscms_data/d3/matteoc/skim/"${SUBMIT_NAME}"/monohiggs_resolved/"
+export SKIM_MONOJET_FLATDIR="/uscms_data/d3/shoh/skim/"${SUBMIT_NAME}"/monojet/"
+export SKIM_MONOHIGGS_FLATDIR="/uscms_data/d3/shoh/skim/"${SUBMIT_NAME}"/monohiggs_boosted/"
+export SKIM_MONOHIGGS_RESOLVED_FLATDIR="/uscms_data/d3/shoh/skim/"${SUBMIT_NAME}"/monohiggs_resolved/"
 
 mkdir -p $SUBMIT_WORKDIR $SUBMIT_OUTDIR/locks/ $SUBMIT_LOGDIR $SKIM_MONOJET_FLATDIR $SKIM_MONOHIGGS_FLATDIR $SKIM_MONOHIGGS_RESOLVED_FLATDIR
 
