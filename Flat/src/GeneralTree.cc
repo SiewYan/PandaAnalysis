@@ -259,6 +259,12 @@ void GeneralTree::Reset() {
     jet2GenPt = -1;
     jet2Eta = -1;
     jet2CSV = -1;
+    jet3Flav = 0;
+    jet3Phi = -1;
+    jet3Pt = -1;
+    jet3GenPt = -1;
+    jet3Eta = -1;
+    jet3CSV = -1;
     isojet1Pt = -1;
     isojet1CSV = -1;
     isojet1Flav = 0;
@@ -557,6 +563,12 @@ void GeneralTree::WriteTree(TTree *t) {
     Book("jet2GenPt",&jet2GenPt,"jet2GenPt/F");
     Book("jet2Eta",&jet2Eta,"jet2Eta/F");
     Book("jet2CSV",&jet2CSV,"jet2CSV/F");
+    Book("jet3Flav",&jet3Flav,"jet3Flav/I");
+    Book("jet3Phi",&jet3Phi,"jet3Phi/F");
+    Book("jet3Pt",&jet3Pt,"jet3Pt/F");
+    Book("jet3GenPt",&jet3GenPt,"jet3GenPt/F");
+    Book("jet3Eta",&jet3Eta,"jet3Eta/F");
+    Book("jet3CSV",&jet3CSV,"jet3CSV/F");
     Book("isojet1Pt",&isojet1Pt,"isojet1Pt/F");
     Book("isojet1CSV",&isojet1CSV,"isojet1CSV/F");
     Book("isojet1Flav",&isojet1Flav,"isojet1Flav/I");
