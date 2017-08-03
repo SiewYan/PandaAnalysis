@@ -17,7 +17,7 @@ mkdir -p $PANDA_FLATDIR
 
 #export SUBMIT_TMPL="skim_monojet_tmpl.py" ####
 #export SUBMIT_TMPL="skim_vbf_tmpl.py"
-export SUBMIT_TMPL="skim_monoj_tmpl.py"                                                                                                                                            
+export SUBMIT_TMPL="skim_monoj_tmpl.py"
 
 export SUBMIT_WORKDIR="${scratch_area}/${USER}/condor/"${SUBMIT_NAME}"/work/"
 export SUBMIT_LOGDIR="${scratch_area}/${USER}/condor/"${SUBMIT_NAME}"/logs/"
