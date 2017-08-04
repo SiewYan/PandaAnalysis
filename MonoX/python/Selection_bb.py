@@ -13,7 +13,7 @@ triggers = {
 
 baseline = 'metFilter==1 && nJet>0 && jet1Pt>30 && nTau==0'
 cat1 = '( ( nJet==1 && jet1CSV>0.800 ) || ( nJet==2 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) )==1 ) )'
-cat2 = '( jet1Pt>50 && jet2Pt>50 && ( ( nJet==2 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) )==2 ) || ( nJet==3 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) + ( jet3CSV>0.800 ) )==2  ) ) )'
+cat2 = '( jet1Pt>50 && jet2Pt>50 && jet3Pt>30 && ( ( nJet==2 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) )==2 ) || ( nJet==3 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) + ( jet3CSV>0.800 ) )==2  ) ) )'
 
 calocutSR = '(abs(calomet-pfmet)/pfUmag)'
 calocutW = '(abs(calomet-pfmet)/pfUWmag)'
@@ -22,7 +22,7 @@ calocutA = '(abs(calomet-pfmet)/pfUAmag)'
 
 cuts['SR0'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && jetNMBtags==0 && jet1Pt>50 && abs(jet1Eta)<2.5 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipfmet>0.5 && pfUmag>250 && calocutSR<0.5')
 cuts['SR1'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && jetNMBtags==1 && jet1Pt>50 && abs(jet1Eta)<2.5 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipfmet>0.5 && pfUmag>250 && calocutSR<0.5 && cat1')
-cuts['SR2'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && jetNMBtags==2 && jet1Pt>50 && abs(jet1Eta)<2.5 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipfmet>0.5 && pfUmag>250 && calocutSR<0.5 && cat2')
+cuts['SR2'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && jetNMBtags==2 && abs(jet1Eta)<2.5 && abs(jet2Eta)<2.5 && abs(jet3Eta)<2.5 && dphipfmet>0.5 && pfUmag>250 && calocutSR<0.5 && cat2')
 
   #inclusive
 cuts['ZmmINC'] = tAND(baseline,'nLooseMuon==2 && looseLep1IsTight==1 && diLepMass>70 && diLepMass<110')
