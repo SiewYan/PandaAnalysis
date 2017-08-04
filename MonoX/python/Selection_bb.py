@@ -11,13 +11,18 @@ triggers = {
     'ele':'(trigger&2)!=0',
 }
 
-baseline = 'metFilter==1 && nJet>1 && jet1Pt>30 && nTau==0 && Sum$(jetPt>30 && jetIso)<2'
+baseline = 'metFilter==1 && nJet>1 && jet1Pt>30 && nTau==0'
 cat1 = '( jet1Pt>50 && ( ( nJet==1 && jet1CSV>0.800 ) || ( nJet==2 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) )==1 ) ) )'
 cat2 = '( jet1Pt>50 && jet2Pt>50 && ( ( nJet==2 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) )==2 ) || ( nJet==3 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) + ( jet3CSV>0.800 ) )==2  ) ) )'
 
-cuts['SR0'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && puppimet>200 && nJet<4 && jet1Pt>50 && abs(jet1Eta)<2.5 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipuppimet>0.5')
-cuts['SR1'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && puppimet>200 && nJet<4 && jet1Pt>50 && abs(jet1Eta)<2.5 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipuppimet>0.5 && cat1')
-cuts['SR2'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && puppimet>200 && nJet<4 && jet1Pt>50 && abs(jet1Eta)<2.5 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipuppimet>0.5 && cat2')
+calocutSR = '(abs(calomet-pfmet)/pfUmag)'
+calocutW = '(abs(calomet-pfmet)/pfUWmag)'
+calocutZ = '(abs(calomet-pfmet)/pfUZmag)'
+calocutA = '(abs(calomet-pfmet)/pfUAmag)'
+
+cuts['SR0'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && jetNMBtags==0 && nJet<4 && jet1Pt>50 && abs(jet1Eta)<2.5 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipuppimet>0.5 && pfUmag>200 && calocutSR<0.5')
+cuts['SR1'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && jetNMBtags==1 && nJet<4 && jet1Pt>50 && abs(jet1Eta)<2.5 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipuppimet>0.5 && pfUmag>200 && calocutSR<0.5 && cat1')
+cuts['SR2'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && jetNMBtags==2 && nJet<4 && jet1Pt>50 && abs(jet1Eta)<2.5 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipuppimet>0.5 && pfUmag>200 && calocutSR<0.5 && cat2')
 
   #inclusive
 cuts['ZmmINC'] = tAND(baseline,'nLooseMuon==2 && looseLep1IsTight==1 && diLepMass>70 && diLepMass<110')
@@ -26,23 +31,23 @@ cuts['WmnINC'] = tAND(baseline,'nLooseMuon==1 && looseLep1IsTight==1')
 cuts['WenINC'] = tAND(baseline,'nLooseElectron==1 && looseLep1IsTight==1')
 cuts['TemINC'] = tAND(baseline,'nLooseMuon==1 && nLooseElectron==1 && looseLep1IsTight==1 && looseLep2IsTight==1 && isojetNBtags==1 && (looseLep1PdgId==13 && looseLep2PdgId==-11 || looseLep1PdgId==-13 && looseLep2PdgId==11)    ')
 
-cuts['ZmmCR'] = tAND(cuts['ZmmINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUZmag>200 && dphipuppiUZ>0.4 && nJet<4 && jet1Pt>50')
-cuts['ZeeCR'] = tAND(cuts['ZeeINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUZmag>200 && dphipuppiUZ>0.4 && nJet<4 && jet1Pt>50')
-cuts['WmnCR'] = tAND(cuts['WmnINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUWmag>200 && dphipuppiUW>0.4 && nJet<4 && jet1Pt>50')
-cuts['WenCR'] = tAND(cuts['WenINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUWmag>200 && dphipuppiUW>0.4 && nJet<4 && jet1Pt>50')
-cuts['TemCR'] = tAND(cuts['TemINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUWmag>200 && dphipuppiUW>0.4 && nJet<4 && jet1Pt>50')
+cuts['ZmmCR'] = tAND(cuts['ZmmINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutZ<0.5 && pfUZmag>200 && dphipfUZ>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5')
+cuts['ZeeCR'] = tAND(cuts['ZeeINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutZ<0.5 && pfUZmag>200 && dphipfUZ>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5')
+cuts['WmnCR'] = tAND(cuts['WmnINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutW<0.5 && pfUWmag>200 && dphipfUW>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5')
+cuts['WenCR'] = tAND(cuts['WenINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutW<0.5 && pfUWmag>200 && dphipfUW>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5')
+cuts['TemCR'] = tAND(cuts['TemINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutW<0.5 && pfUWmag>200 && dphipfUW>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5')
 
-cuts['ZmmbCR'] = tAND(cuts['ZmmINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUZmag>200 && dphipuppiUZ>0.4 && nJet<4 && jet1Pt>50 && cat1')
-cuts['ZeebCR'] = tAND(cuts['ZeeINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUZmag>200 && dphipuppiUZ>0.4 && nJet<4 && jet1Pt>50 && cat1')
-cuts['WmnbCR'] = tAND(cuts['WmnINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUWmag>200 && dphipuppiUW>0.4 && nJet<4 && jet1Pt>50 && cat1')
-cuts['WenbCR'] = tAND(cuts['WenINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUWmag>200 && dphipuppiUW>0.4 && nJet<4 && jet1Pt>50 && cat1')
-cuts['TembCR'] = tAND(cuts['TemINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUWmag>200 && dphipuppiUW>0.4 && nJet<4 && jet1Pt>50 && cat1')
+cuts['ZmmbCR'] = tAND(cuts['ZmmINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutZ<0.5 && pfUZmag>200 && dphipfUZ>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
+cuts['ZeebCR'] = tAND(cuts['ZeeINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutZ<0.5 && pfUZmag>200 && dphipfUZ>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
+cuts['WmnbCR'] = tAND(cuts['WmnINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutW<0.5 && pfUWmag>200 && dphipfUW>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
+cuts['WenbCR'] = tAND(cuts['WenINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutW<0.5 && pfUWmag>200 && dphipfUW>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
+cuts['TembCR'] = tAND(cuts['TemINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutW<0.5 && pfUWmag>200 && dphipfUW>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
 
-cuts['ZmmbbCR'] = tAND(cuts['ZmmINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUZmag>200 && dphipuppiUZ>0.4 && nJet<4 && jet1Pt>50 && cat2')
-cuts['ZeebbCR'] = tAND(cuts['ZeeINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUZmag>200 && dphipuppiUZ>0.4 && nJet<4 && jet1Pt>50 && cat2')
-cuts['WmnbbCR'] = tAND(cuts['WmnINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUWmag>200 && dphipuppiUW>0.4 && nJet<4 && jet1Pt>50 && cat2')
-cuts['WenbbCR'] = tAND(cuts['WenINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUWmag>200 && dphipuppiUW>0.4 && nJet<4 && jet1Pt>50 && cat2')
-cuts['TembbCR'] = tAND(cuts['TemINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && puppiUWmag>200 && dphipuppiUW>0.4 && nJet<4 && jet1Pt>50 && cat2')
+cuts['ZmmbbCR'] = tAND(cuts['ZmmINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutZ<0.5 && pfUZmag>200 && dphipfUZ>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
+cuts['ZeebbCR'] = tAND(cuts['ZeeINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutZ<0.5 && pfUZmag>200 && dphipfUZ>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
+cuts['WmnbbCR'] = tAND(cuts['WmnINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutW<0.5 && pfUWmag>200 && dphipfUW>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
+cuts['WenbbCR'] = tAND(cuts['WenINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutW<0.5 && pfUWmag>200 && dphipfUW>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
+cuts['TembbCR'] = tAND(cuts['TemINC'],'(nLooseElectron+nLoosePhoton+nTau)==0 && calocutW<0.5 && pfUWmag>200 && dphipfUW>0.5 && jet1Pt>50 && abs(jet1Eta)<2.5 && cat1')
 
 ##weights for specific regions                                                                   
 #base
