@@ -15,9 +15,6 @@ baseline = 'metFilter==1 && nJet>0 && jet1Pt>30 && nTau==0'
 cat1 = '( ( nJet==1 && jet1CSV>0.800 ) || ( nJet==2 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) )==1 ) )'
 cat2 = '( jet1Pt>50 && jet2Pt>50 && ( ( nJet==2 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) )==2 ) || ( nJet==3 && ( ( jet1CSV>0.800 ) + ( jet2CSV>0.800 ) + ( jet3CSV>0.800 ) )==2  ) ) )'
 
-cat1 = '( nJet>1 && jet1Pt>50 && ((( jet1CSV>0.800 ) + ( jet3CSV>0.800))==1) )'
-cat2 = '( nJet>2 && jet1Pt>50 && jet2Pt>50 && ((( Jet1.CSV>0.800 ) + ( Jet2.CSV>0.800 ) + ( Jet3.CSV>0.800 )) ==2 ) )'
-
 calocutSR = '(abs(calomet-pfmet)/pfUmag)'
 calocutW = '(abs(calomet-pfmet)/pfUWmag)'
 calocutZ = '(abs(calomet-pfmet)/pfUZmag)'
