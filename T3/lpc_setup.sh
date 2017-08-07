@@ -17,14 +17,13 @@ mkdir -p $PANDA_FLATDIR
 
 #export SUBMIT_TMPL="skim_monojet_tmpl.py" ####
 #export SUBMIT_TMPL="skim_vbf_tmpl.py"
-export SUBMIT_TMPL="skim_monoj_tmpl.py"
+export SUBMIT_TMPL="skim_monoj_tmpl.py"                                                                                                                                            
 
 export SUBMIT_WORKDIR="${scratch_area}/${USER}/condor/"${SUBMIT_NAME}"/work/"
 export SUBMIT_LOGDIR="${scratch_area}/${USER}/condor/"${SUBMIT_NAME}"/logs/"
 export SKIM_CFGDIR="${scratch_area}/${USER}/skim/configs"
 #EOS
 export SUBMIT_OUTDIR="/store/user/${USER}/panda/"${SUBMIT_NAME}"/batch/"
-#export SUBMIT_OUTDIR="/store/user/naina25/panda/"${SUBMIT_NAME}"/batch/"
 
 export SKIM_MONOJET_FLATDIR="${scratch_area}/${USER}/skim/"${SUBMIT_NAME}"/monojet/"
 export SKIM_MONOHIGGS_FLATDIR="${scratch_area}/${USER}/skim/"${SUBMIT_NAME}"/monohiggs_boosted/"
@@ -64,4 +63,5 @@ export PRIVATE_CFGDIR="${HOME}/cms/condor/monotop_private_panda/"
 #export PANDA_XSECS=/home/snarayan/cms/cmssw/analysis/MonoTop_Xsec/
 #export PANDA_FITTING=${PANDA_FLATDIR}/fitting/
 #mkdir -p $PANDA_FITTING/scans/ $PANDA_FITTING/logs/
+
 
