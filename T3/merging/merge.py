@@ -31,6 +31,7 @@ system('mkdir -p /uscmst1b_scratch/lpc1/3DayLifetime/%s/split'%user) # tmp dir
 system('mkdir -p /uscmst1b_scratch/lpc1/3DayLifetime/%s/merged'%user) # tmp dir
 
 inbase = environ['SUBMIT_OUTDIR']
+#inbase  ='root://cmseos.fnal.gov/'+ inbase1.split('/eos/uscms')[1]
 outbase = environ['PANDA_FLATDIR']
 
 if VERBOSE:
@@ -123,10 +124,9 @@ def merge(shortnames,mergedname):
                     pd = pds[shortname_][0]
                     xsec = pds[shortname_][1]
                     break
-      #  inpath = 'root://cmseos.fnal.gov/'+inbase+shortname+'_*.root'
-      #  inpath = '`xrdfsls -u '+inbase+' | grep \'\\'+shortname+'\'`'
-      #  inpath = '`xrdfs root://cmseos.fnal.gov ls -u '+inbase+' | grep \'\\'+shortname+'\'`'
-        inpath = '`xrdfs root://cmseos.fnal.gov ls -u '+inbase+' | grep \''+shortname+'\'`'
+
+        inpath = '`xrdfs root://cmseos.fnal.gov ls -u ' + inbase + ' | grep \'' + shortname + '\'`'
+        print inpath
         hadd(inpath,'/uscmst1b_scratch/lpc1/3DayLifetime/%s/split/%s.root'%(user,shortname))
         if xsec>0:
             normalizeFast('/uscmst1b_scratch/lpc1/3DayLifetime/%s/split/%s.root'%(user,shortname),xsec)

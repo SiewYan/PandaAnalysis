@@ -23,7 +23,7 @@ export SUBMIT_WORKDIR="${scratch_area}/${USER}/condor/"${SUBMIT_NAME}"/work/"
 export SUBMIT_LOGDIR="${scratch_area}/${USER}/condor/"${SUBMIT_NAME}"/logs/"
 export SKIM_CFGDIR="${scratch_area}/${USER}/skim/configs"
 #EOS
-export SUBMIT_OUTDIR="/store/user/naina25/panda/"${SUBMIT_NAME}"/batch/"
+export SUBMIT_OUTDIR="/store/user/${USER}/panda/"${SUBMIT_NAME}"/batch/"
 
 export SKIM_MONOJET_FLATDIR="${scratch_area}/${USER}/skim/"${SUBMIT_NAME}"/monojet/"
 export SKIM_MONOHIGGS_FLATDIR="${scratch_area}/${USER}/skim/"${SUBMIT_NAME}"/monohiggs_boosted/"
