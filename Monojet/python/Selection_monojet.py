@@ -14,14 +14,12 @@ triggers = {
 }
 
 baseline = 'metFilter==1  && nJet>0 && nTau==0'
-calocutSR = (abs(calomet-pfmet)/pfUmag)
-calocutW = (abs(calomet-pfmet)/pfUWmag)
-calocutZ = (abs(calomet-pfmet)/pfUZmag)
-calocutA = (abs(calomet-pfmet)/pfUAmag)
+calocutSR = '(abs(calomet-pfmet)/pfUmag)'
+calocutW = '(abs(calomet-pfmet)/pfUWmag)'
+calocutZ = '(abs(calomet-pfmet)/pfUZmag)'
+calocutA = '(abs(calomet-pfmet)/pfUAmag)'
 
 cuts['SR0'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && jetNMBtags==0 && jet1Pt>100 && abs(jet1Eta)<2.5 && dphipfmet>0.5 && pfUmag>250 && calocutSR<0.5')
-cuts['SR1'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && pfUmag>250 && jet2Pt>30 && abs(jet2Eta)<2.5 && dphipfmet>0.5 && cat1')
-cuts['SR2'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && pfUmag>250 && abs(jet1Eta)<2.5 && abs(jet2Eta)<2.5 && dphipfmet>0.5 && cat2')
 
   #inclusive
 cuts['ZmmINC'] = tAND(baseline,'nLooseMuon==2 && looseLep1IsTight==1 && diLepMass>60 && diLepMass<120')
