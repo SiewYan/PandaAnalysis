@@ -1365,7 +1365,7 @@ void PandaAnalyzer::Run() {
     vector<panda::Jet*> cleanedJets, isoJets, btaggedJets, centralJets;
     vector<int> btagindices;
     TLorentzVector vJet;
-    panda::Jet *jet1=0, *jet2=0;
+    panda::Jet *jet1=0, *jet2=0, *jet3=0;
     panda::Jet *jot1=0, *jot2=0;
     panda::Jet *jotUp1=0, *jotUp2=0;
     panda::Jet *jotDown1=0, *jotDown2=0;
@@ -1375,7 +1375,7 @@ void PandaAnalyzer::Run() {
     gt->dphipuppiUA=999; gt->dphipfUA=999;
     float maxJetEta = (doVBF) ? 4.7 : 4.5;
     float maxIsoEta = (doMonoH) ? maxJetEta : 2.5;
-    unsigned nJetDPhi = (doVBF) ? 4 : 5;
+    unsigned nJetDPhi = (doVBF) ? 4 : 4;
 
     for (auto& jet : *jets) {
      
@@ -1432,7 +1432,14 @@ void PandaAnalyzer::Run() {
           gt->jet2Eta = jet.eta();
           gt->jet2Phi = jet.phi();
           gt->jet2CSV = csv;
-        }
+        } else if (centralJets.size()==3) {
+	  jet3 = &jet;
+          gt->jet3Pt = jet.pt();
+          gt->jet3Eta = jet.eta();
+          gt->jet3Phi = jet.phi();
+          gt->jet3CSV = csv;
+	}
+	
       }
 
       if (doMonoH) {
@@ -1969,7 +1976,10 @@ void PandaAnalyzer::Run() {
         } else if (jet==centralJets.at(1)) {
           gt->jet2Flav = flavor;
           gt->jet2GenPt = genpt;
-        }
+        }else if (jet==centralJets.at(2)) {
+	  gt->jet3Flav = flavor;
+          gt->jet3GenPt = genpt;
+	}
         if (isIsoJet) {
           if (jet==isoJets.at(0))
             gt->isojet1Flav = flavor;
