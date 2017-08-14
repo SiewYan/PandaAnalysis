@@ -27,10 +27,8 @@ for k,v in processes.iteritems():
 VERBOSE=True
 
 user = environ['USER']
-system('mkdir -p /uscmst1b_scratch/lpc1/3DayLifetime/%s/split'%user) # tmp dir                                                                                                                             
-system('mkdir -p /uscmst1b_scratch/lpc1/3DayLifetime/%s/merged'%user) # tmp dir 
-#system('mkdir -p /tmp/%s/split'%user) # tmp dir
-#system('mkdir -p /tmp/%s/merged'%user) # tmp dir
+system('mkdir -p /uscmst1b_scratch/lpc1/3DayLifetime/%s/split'%user) # tmp dir
+system('mkdir -p /uscmst1b_scratch/lpc1/3DayLifetime/%s/merged'%user) # tmp dir
 
 inbase = environ['SUBMIT_OUTDIR']
 #inbase  ='root://cmseos.fnal.gov/'+ inbase1.split('/eos/uscms')[1]
@@ -46,7 +44,7 @@ def hadd(inpath,outpath):
         infiles = glob(inpath)
         PInfo(sname,'hadding %s into %s'%(inpath,outpath))
         cmd = 'hadd -k -ff -n 100 -f %s %s %s'%(outpath,inpath,suffix)
-        #print 'cmd = hadd -k -ff -n 100 -f %s %s %s' %(outpath,inpath,suffix)
+        print cmd
         system(cmd)
         return
     else:
@@ -126,7 +124,7 @@ def merge(shortnames,mergedname):
                     pd = pds[shortname_][0]
                     xsec = pds[shortname_][1]
                     break
-        #inpath = inbase+shortname+'_*.root'
+
         inpath = '`xrdfs root://cmseos.fnal.gov ls -u ' + inbase + ' | grep \'' + shortname + '\'`'
         print inpath
         hadd(inpath,'/uscmst1b_scratch/lpc1/3DayLifetime/%s/split/%s.root'%(user,shortname))

@@ -28,11 +28,12 @@ skimmer.lastEvent=50
 skimmer.isData=False
 skimmer.SetFlag('puppi',False)
 skimmer.SetFlag('fatjet',False)
-skimmer.SetFlag('vbf',True)
+skimmer.SetFlag('vbf',False)
 skimmer.SetFlag('firstGen',False)
 skimmer.SetFlag('applyEGCorr',False)
 skimmer.SetFlag('applyJSON',False)
-skimmer.SetFlag('pfCands',False)
+skimmer.SetFlag('pfCands',True)
+skimmer.SetFlag('monohiggs',True)
 #skimmer.SetFlag('monohiggs',True)
 if skimmer.isData and False:
     with open(getenv('CMSSW_BASE')+'/src/PandaAnalysis/data/certs/Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.txt') as jsonFile:
@@ -40,9 +41,8 @@ if skimmer.isData and False:
         for run,lumis in payload.iteritems():
             for l in lumis:
                 skimmer.AddGoodLumiRange(int(run),l[0],l[1])
-skimmer.processType = root.PandaAnalyzer.kTT
-#skimmer.processType = root.PandaAnalyzer.kWEWK
-#skimmer.SetPreselectionBit(root.PandaAnalyzer.kFatjet)
+skimmer.processType = root.PandaAnalyzer.kTT                                                                                                                                                 
+#skimmer.SetPreselectionBit(root.PandaAnalyzer.kMonojet)
 #system("pxrdcp %s input.root '!pfCandidates'"%(torun))
 #fin = root.TFile.Open('input.root')
 fin = root.TFile.Open(torun)

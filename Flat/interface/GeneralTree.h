@@ -322,6 +322,12 @@ class GeneralTree : public genericTree {
     float jet2GenPt = -1;
     float jet2Eta = -1;
     float jet2CSV = -1;
+    int jet3Flav = -1;
+    float jet3Phi = -1;
+    float jet3Pt = -1;
+    float jet3GenPt = -1;
+    float jet3Eta = -1;
+    float jet3CSV = -1;
     float isojet1Pt = -1;
     float isojet1CSV = -1;
     int isojet1Flav = -1;
