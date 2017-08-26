@@ -11,10 +11,7 @@ cuts = {}
 weights = {}
 triggers = {}
 
-#baseline = 'metFilter==1 && nFatjet==1 && fj1Pt>200 && nTau==0 && fj1ECFN_2_3_20/pow(fj1ECFN_1_2_20,2.00)<0.113'
-#baseline = 'metFilter==1 && nFatjet==1 && fj1Pt>200 && nTau==0 && N2DDT<0.0 && Sum$(jetPt>30 && jetIso)<2'
-#baseline = 'metFilter==1 && nFatjet==1 && fj1Pt>200 && nTau==0 && Sum$(jetPt>30 && jetIso)<2'
-baseline = 'metFilter==1 && nFatjet==1 && fj1Pt>200 && nTau==0 && Sum$(jetPt>30 && jetIso)<2 && fj1MSD_corr>100 && fj1MSD_corr<150'
+baseline = 'metFilter==1 && nFatjet==1 && fj1Pt>200 && nTau==0 && Sum$(jetPt>30 && jetIso)<2 && log(fj1MSD_corr*fj1MSD_corr/fj1Pt/fj1Pt)<-1.5 && log(fj1MSD_corr*fj1MSD_corr/fj1Pt/fj1Pt)>-6.0'
 
 #cuts for specific regions
 cuts['signal'] = tAND(baseline,'nLooseLep==0 && nLooseElectron==0 && nLoosePhoton==0 && puppimet>200 && isojetNBtags==0 && dphipuppimet>0.4 && fj1DoubleCSV>0.75')

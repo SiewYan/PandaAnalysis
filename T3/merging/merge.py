@@ -125,7 +125,7 @@ def merge(shortnames,mergedname):
                     xsec = pds[shortname_][1]
                     break
 
-        inpath = '`xrdfs root://cmseos.fnal.gov ls -u ' + inbase + ' | grep \'' + shortname + '\'`'
+        inpath = '`xrdfs root://cmseos.fnal.gov ls -u ' + inbase + ' | grep \'' + shortname + '_\'`'
         print inpath
         hadd(inpath,'/uscmst1b_scratch/lpc1/3DayLifetime/%s/split/%s.root'%(user,shortname))
         if xsec>0:

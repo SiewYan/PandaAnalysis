@@ -11,16 +11,16 @@ import os
 import argparse
 
 parser = argparse.ArgumentParser(description='make forest')
-parser.add_argument('--region',metavar='region',type=str,default=None)
 parser.add_argument('--output',metavar='output',type=str,default='')
 parser.add_argument('--input',metavar='input',type=str,default='/data/t3home000/mcremone/lpc/jorgem/skim/v_8026_0_4/monohiggs_boosted/')
-region = parser.parse_args().region
+parser.add_argument('--process',metavar='process',type=str,default='')
 basedir = parser.parse_args().input
 foredir = parser.parse_args().output
+process = parser.parse_args().process
 
 
 def ComputeDDT(name, point, nPtBins, nRhoBins, H):
-	DDT = TH2F(name, "", nRhoBins, -6, -1.5, nPtBins, 200, 800)
+	DDT = TH2F(name, "", nRhoBins, -6, -1.5, nPtBins, 200, 1600)
 	DDT.SetStats(0)
 	nXb = H.GetXaxis().GetNbins()
 	nYb = H.GetYaxis().GetNbins()
@@ -44,7 +44,7 @@ def DisplayDDT(DDT, Title, SaveName):
 	C.Print("MAP_"+SaveName+".gif")
 	C.SaveAs("DDT_"+SaveName+".pdf")
 
-def setlist(path):
+def setlist(path,process):
 	f = []
 	if os.path.isfile(path):
 		if not "root" in path:
@@ -61,9 +61,9 @@ def setlist(path):
 		#print lroot
 		for lr in lroot:
 			if 'DDT' in lr: continue
-			if "." in lr:
+			if ".root" in lr:
 				f_ = lr.split(".")[0]
-				f.append((f_,path+'/'+lr))
+				if f_==process: f.append((f_,path+'/'+lr))
 	#print f
 	return f
 def outname(path):
@@ -77,57 +77,18 @@ def outname(path):
 			fg = g+'/'
 		return fg,fs
 	else: return sys.env('SKIM_MONOHIGGS_BOOSTED_FLATDIR'),"random"
-#Bkgs =["/data/t3home000/mcremone/lpc/jorgem/panda/v_8026_0_4/flat/control/TTbar.root", "/data/t3home000/jorgem/lpc/mcremone/panda/v_8026_0_4/flat/control/WJets.root","/data/t3home000/mcremone/lpc/jorgem/panda/v_8026_0_4/flat/ZJets.root"]
-#Bkgs_tags=[("TTbar","/data/t3home000/mcremone/lpc/jorgem/panda/v_8026_0_4/flat/control/TTbar.root"),("WJets","/data/t3home000/mcremone/lpc/jorgem/panda/v_8026_0_4/flat/control/WJets.root"),("ZJets","/data/t3home000/mcremone/lpc/jorgem/panda/v_8026_0_4/flat/control/ZJets.root")]
-#Bkgs_tags=[("TTbar","/data/t3home000/mcremone/lpc/jorgem/panda/v_8026_0_4/flat/control/TTbar.root"),("WJets","/data/t3home000/mcremone/lpc/jorgem/panda/v_8026_0_4/flat/control/WJets.root"),("ZJets","/data/t3home000/mcremone/lpc/jorgem/panda/v_8026_0_4/flat/control/ZJets.root")]
-#Bkgs_tags=[("Diaboson","/data/t3home000/mcremone/lpc/jorgem/panda/v_8026_0_4/flat/control///fitting/fittingForest_test.root")]
-toProcess = region
-#selection of process
-subfolder = ''
-if toProcess=='signal':
-  subfolder = 'sr/'
-elif toProcess=='wmn':
-  subfolder = 'cr_w_mu/'
-elif toProcess=='wmn_fail':
-  subfolder = 'cr_w_mu/'
-elif toProcess=='wen':
-  subfolder = 'cr_w_el/'
-elif toProcess=='wen_fail':
-  subfolder = 'cr_w_el/'
-elif toProcess=='tm':
-  subfolder = 'cr_ttbar_mu/'
-elif toProcess=='tm_fail':
-  subfolder = 'cr_ttbar_mu/'
-elif toProcess=='te':
-  subfolder = 'cr_ttbar_el/'
-elif toProcess=='te_fail':
-  subfolder = 'cr_ttbar_el/'
-elif toProcess=='zmm':
-  subfolder = 'cr_dimuon/'
-elif toProcess=='zmm_fail':
-  subfolder = 'cr_dimuon/'
-elif toProcess=='zee':
-  subfolder = 'cr_dielectron/'
-elif toProcess=='zee_fail':
-  subfolder = 'cr_dielectron/'
-elif toProcess=='pho':
-  subfolder = 'cr_gamma/'
-elif toProcess=='pho_fail':
-  subfolder = 'cr_gamma/'
 
 path_ = basedir
-if region: path_ = basedir+'/'+subfolder
-
 #print path_
 if path_ :
-	Bkgs_tags = setlist(path_)
+	Bkgs_tags = setlist(path_,process)
 #print Bkgs_tags
 H3={}
 
 
 for bks,B in Bkgs_tags:
 
-	H3[bks] = TH3F("H3_%s"%(bks), "H3_%s"%(bks), 9, -6, -1.5, 12, 200, 800, 500, 0, 0.5)
+	H3[bks] = TH3F("H3_%s"%(bks), "H3_%s"%(bks), 9, -6, -1.5, 12, 200, 1600, 500, 0, 0.5)
 if  foredir == '': 
 	print 'No output: Taking default one'
 	foredir = path_
@@ -154,8 +115,8 @@ for bks,B in Bkgs_tags:
                         sys.stdout.flush()
 		'''
 		T.GetEntry(j)
-		#weight = T.puWeight*T.scale1fb*T.kfactor*T.kfactorNLO
-		weight = 1
+		weight = T.normalizedWeight*T.sf_pu*T.sf_ewkV*T.sf_qcdV
+		#weight = 1
 		PT = T.fj1Pt
 		preRHO = T.fj1MSD_corr*T.fj1MSD_corr/T.fj1Pt/T.fj1Pt
 		if preRHO > 0. and T.fj1ECFN_1_2_10 != 0.:
@@ -169,10 +130,10 @@ print "%s/DDT.root"%(foredir)
 Fout = TFile("%s/DDT.root"%foredir, "recreate")
 Fout.cd()
 for key in H3:
-	DDT_5by6[key]=ComputeDDT('DDT_5by6_%s'%(key), 0.05, 12, 9, H3[key])
+	DDT_5by6[key]=ComputeDDT('DDT_5by6', 0.2, 12, 9, H3[key])
 	#DisplayDDT(DDT_5by6[key], "DDT vals at 5%", "DDT_5by6")
 	DDT_5by6[key].Write()
-	DDT_5by3[key]=ComputeDDT('DDT_5by3_%s'%(key), 0.05, 3, 9, H3[key])
+	DDT_5by3[key]=ComputeDDT('DDT_5by3', 0.2, 3, 9, H3[key])
 	#DisplayDDT(DDT_5by3[key], "DDT vals at 5%", "DDT_5by3")
 	DDT_5by3[key].Write()
 Fout.Close()
