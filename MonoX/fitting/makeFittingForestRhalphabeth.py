@@ -15,8 +15,8 @@ parser.add_argument('--input',metavar='input',type=str,default=getenv('PANDA_FLA
 
 args = parser.parse_args()
 nddt = args.ddt
-out_region = args.region
-region = out_region.split('_')[0]
+region = args.region
+#region = out_region.split('_')[0]
 if region=='test':
     is_test = True 
     region = 'signal'
@@ -150,7 +150,6 @@ ps ={'ZtoNuNu','ZJets','WJets','SingleTop','Diboson','QCD','SingleElectron','TTb
 
 forestDir = basedir + '/rhalphabeth/'
 os.system('mkdir -p %s/%s'%(forestDir,region))
-region = out_region
 
 for rfiles in os.listdir(basedir):
 	if '.root' in rfiles: rfile = rfiles.split('.')[0]
@@ -158,7 +157,7 @@ for rfiles in os.listdir(basedir):
 	if  rfile == 'SingleElectron' and ('zee' in region or 'te' in region or 'wen' in region):	
 	 	print rfile,0
 		factory = forest.RegionFactory(name = region if not(is_test) else 'test',
-        	                       cut = sel.cuts[out_region],
+        	                       cut = sel.cuts[region],
                 	               variables = vmap, 
                         	       mc_variables = mc_vmap, 
                               	       mc_weights = weights)
@@ -167,7 +166,7 @@ for rfiles in os.listdir(basedir):
 	if rfile == 'MET' and ('zmm' in region or 'tm' in region or 'wmn' in region or 'signal' in region):
 		print rfile,1
 		factory = forest.RegionFactory(name = region if not(is_test) else 'test',
-        	                       cut = sel.cuts[out_region],
+        	                       cut = sel.cuts[region],
                 	               variables = vmap, 
                         	       mc_variables = mc_vmap, 
                               	       mc_weights = weights)
@@ -176,7 +175,7 @@ for rfiles in os.listdir(basedir):
 	if rfile == 'SinglePhoton' and  'pho' in region:
 		print rfile,2
 		factory = forest.RegionFactory(name = region if not(is_test) else 'test',
-        	                       cut = sel.cuts[out_region],
+        	                       cut = sel.cuts[region],
                 	               variables = vmap, 
                         	       mc_variables = mc_vmap, 
                               	       mc_weights = weights)
@@ -185,7 +184,7 @@ for rfiles in os.listdir(basedir):
 	if rfile != 'SingleElectron' and rfile != 'SinglePhoton' and rfile != 'MET':
 		print rfile,3
 		factory = forest.RegionFactory(name = region if not(is_test) else 'test',
-        	                       cut = sel.cuts[out_region],
+        	                       cut = sel.cuts[region],
                 	               variables = vmap, 
                         	       mc_variables = mc_vmap, 
                               	       mc_weights = weights)
@@ -195,14 +194,14 @@ for rfiles in os.listdir(basedir):
 	
 pd = {'ZpA0h_med-600_dm-300','ZpA0h_med-800_dm-300','ZpA0h_med-1000_dm-300','ZpA0h_med-1200_dm-300','ZpA0h_med-1400_dm-300','ZpA0h_med-1700_dm-300','ZpA0h_med-2000_dm-300','ZpA0h_med-2500_dm-300','ZpBaryonic_med-10_dm-1','ZpBaryonic_med-10_dm-10','ZpBaryonic_med-10_dm-50','ZpBaryonic_med-10_dm-150','ZpBaryonic_med-10_dm-500','ZpBaryonic_med-15_dm-10','ZpBaryonic_med-20_dm-1','ZpBaryonic_med-50_dm-1','ZpBaryonic_med-50_dm-10','ZpBaryonic_med-50_dm-50','ZpBaryonic_med-95_dm-50','ZpBaryonic_med-100_dm-1','ZpBaryonic_med-100_dm-10','ZpBaryonic_med-200_dm-1','ZpBaryonic_med-200_dm-50','ZpBaryonic_med-200_dm-150','ZpBaryonic_med-295_dm-150','ZpBaryonic_med-300_dm-1','ZpBaryonic_med-300_dm-50','ZpBaryonic_med-500_dm-1','ZpBaryonic_med-500_dm-150','ZpBaryonic_med-995_dm-500','ZpBaryonic_med-1000_dm-1','ZpBaryonic_med-1000_dm-150','ZpBaryonic_med-1000_dm-1000','ZpBaryonic_med-1995_dm-1000','ZpBaryonic_med-2000_dm-1','ZpBaryonic_med-2000_dm-500','ZpBaryonic_med-10000_dm-1','ZpBaryonic_med-10000_dm-150','ZpBaryonic_med-10000_dm-500','ZpBaryonic_med-10000_dm-10','ZpBaryonic_med-10000_dm-50'}
 
-if out_region in ['signal_scalar','signal_vector','signal_thq','signal_stdm','signal','sr']:
+if region in ['signal_scalar','signal_vector','signal_thq','signal_stdm','signal','sr']:
 
     for rfiles in os.listdir(basedir):
         if '.root' in rfiles: rfile = rfiles.split('.')[0]
         if rfile not in pd: continue
         #print rfile
         factory = forest.RegionFactory(name = region if not(is_test) else 'test',
-                                       cut = sel.cuts[out_region],
+                                       cut = sel.cuts[region],
                                        variables = vmap,
                                        mc_variables = mc_vmap,
                                        mc_weights = weights)
