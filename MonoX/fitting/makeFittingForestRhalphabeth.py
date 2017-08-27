@@ -27,7 +27,7 @@ argv=[]
 import PandaAnalysis.Flat.fitting_forest as forest 
 from PandaCore.Tools.Misc import *
 import PandaCore.Tools.Functions # kinematics
-import PandaAnalysis.MonoX.Selection_doubleb as sel
+import PandaAnalysis.MonoX.MonoXSelection as sel
 
 basedir = args.input
 lumi = 35900
@@ -141,7 +141,6 @@ vmap['n2'] = 'fj1ECFN_2_3_10/pow(fj1ECFN_1_2_10,2.00)'
 #vmap['ndd53'] = 'n2ddt53'
 
 #weights
-
 weights = {'nominal' : sel.weights[region]%lumi}
 #btag shifts to be added here, maybe
 
@@ -194,7 +193,7 @@ for rfiles in os.listdir(basedir):
 	
 pd = {'ZpA0h_med-600_dm-300','ZpA0h_med-800_dm-300','ZpA0h_med-1000_dm-300','ZpA0h_med-1200_dm-300','ZpA0h_med-1400_dm-300','ZpA0h_med-1700_dm-300','ZpA0h_med-2000_dm-300','ZpA0h_med-2500_dm-300','ZpBaryonic_med-10_dm-1','ZpBaryonic_med-10_dm-10','ZpBaryonic_med-10_dm-50','ZpBaryonic_med-10_dm-150','ZpBaryonic_med-10_dm-500','ZpBaryonic_med-15_dm-10','ZpBaryonic_med-20_dm-1','ZpBaryonic_med-50_dm-1','ZpBaryonic_med-50_dm-10','ZpBaryonic_med-50_dm-50','ZpBaryonic_med-95_dm-50','ZpBaryonic_med-100_dm-1','ZpBaryonic_med-100_dm-10','ZpBaryonic_med-200_dm-1','ZpBaryonic_med-200_dm-50','ZpBaryonic_med-200_dm-150','ZpBaryonic_med-295_dm-150','ZpBaryonic_med-300_dm-1','ZpBaryonic_med-300_dm-50','ZpBaryonic_med-500_dm-1','ZpBaryonic_med-500_dm-150','ZpBaryonic_med-995_dm-500','ZpBaryonic_med-1000_dm-1','ZpBaryonic_med-1000_dm-150','ZpBaryonic_med-1000_dm-1000','ZpBaryonic_med-1995_dm-1000','ZpBaryonic_med-2000_dm-1','ZpBaryonic_med-2000_dm-500','ZpBaryonic_med-10000_dm-1','ZpBaryonic_med-10000_dm-150','ZpBaryonic_med-10000_dm-500','ZpBaryonic_med-10000_dm-10','ZpBaryonic_med-10000_dm-50'}
 
-if region in ['signal_scalar','signal_vector','signal_thq','signal_stdm','signal','sr']:
+if region in ['signal_scalar','signal_vector','signal_thq','signal_stdm','signal','signal_fail']:
 
     for rfiles in os.listdir(basedir):
         if '.root' in rfiles: rfile = rfiles.split('.')[0]
