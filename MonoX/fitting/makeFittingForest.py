@@ -28,7 +28,8 @@ argv=[]
 import PandaAnalysis.Flat.fitting_forest as forest 
 from PandaCore.Tools.Misc import *
 import PandaCore.Tools.Functions # kinematics
-import PandaAnalysis.MonoX.MonoXSelection as sel
+#import PandaAnalysis.MonoX.MonoXSelection as sel
+import PandaAnalysis.MonoX.MonoJetSelection as sel
 
 basedir = args.input
 lumi = 35900
@@ -38,7 +39,7 @@ def f(x):
 
 def addN2DDT(rootfile):
         #load the map
-	trans = r.TFile(basedir+'/DDT.root')
+	trans = r.TFile('DDT.root')
 	f56 = trans.Get("DDT_5by6")
 	f53 = trans.Get("DDT_5by3")
         #open the file
@@ -124,19 +125,20 @@ def shift_btags(additional=None):
 #vmap definition
 vmap = {}
 mc_vmap = {'genBosonPt':'genBosonPt'}
-if region in ['signal','test']:
-    u,uphi, = ('puppimet','dphipuppimet')
+if 'signal' in region or 'test' in region:
+    u,uphi, = ('pfmet','dphipfmet')
 elif 'pho' in region:
-    u,uphi = ('puppiUAmag','dphipuppiUA')
-elif 'wmn'or 'wen' or 'te' or 'tm' in region:
-    u,uphi = ('puppiUWmag','dphipuppiUW')
-elif 'zee'  or 'zmn' in region:
-    u,uphi = ('puppiUZmag','dphipuppiUZ')
+    u,uphi = ('pfUAmag','dphipfUA')
+elif 'wmn' in region or 'wen' in region or 'ten' in region or 'tmn' in region:
+    u,uphi = ('pfUWmag','dphipfUW')
+elif 'zee' in region or 'zmm' in region or 'tem' in region or 'tme' in region:
+    u,uphi = ('pfUZmag','dphipfUZ')
 vmap['met'] = 'min(%s,999.9999)'%u 
-vmap['fjpt'] = 'fj1Pt'
-vmap['fjmass'] = 'fj1MSD_corr'
-vmap['n2'] = 'fj1ECFN_2_3_10/pow(fj1ECFN_1_2_10,2.00)'
-vmap['doubleb'] = 'fj1DoubleCSV'
+if nddt:
+    vmap['fjpt'] = 'fj1Pt'
+    vmap['fjmass'] = 'fj1MSD_corr'
+    vmap['n2'] = 'fj1ECFN_2_3_10/pow(fj1ECFN_1_2_10,2.00)'
+    vmap['doubleb'] = 'fj1DoubleCSV'
 
 #weights
 weights = {'nominal' : sel.weights[region]%lumi}
@@ -153,15 +155,15 @@ if is_test:
     factory.add_process(f('Diboson'),'Diboson')
 
 #photon CR
-elif region=='pho':
+elif 'pho' in region:
     factory.add_process(f('GJets'),'Pho')
     factory.add_process(f('SinglePhoton'),'Data',is_data=True)
     #factory.add_process(f('SinglePhoton'),'QCD',is_data=True,
     #                    extra_weights='sf_phoPurity',extra_cut=sel.triggers['pho'])
     factory.add_process(f('QCD'),'QCD')
 
-elif region not in ['signal_scalar','signal_vector','signal_thq','signal_stdm','signal','signal_fail']:
 
+elif 'signal' not in region:
     factory.add_process(f('ZtoNuNu'),'Zvv')
     factory.add_process(f('ZJets'),'Zll')
     factory.add_process(f('WJets'),'Wlv')
@@ -170,13 +172,13 @@ elif region not in ['signal_scalar','signal_vector','signal_thq','signal_stdm','
     factory.add_process(f('QCD'),'QCD')
     factory.add_process(f('TTbar'),'ttbar')
 
-    if ('zee' == region or 'te' == region or 'wen' == region or 'zee_fail' == region or 'te_fail' == region or 'wen_fail' == region):
+    if 'zee' in region or 'te' in region or 'wen' in region:
         factory.add_process(f('SingleElectron'),'Data',is_data=True,extra_cut=sel.eleTrigger)
 
-    if ('zmm' == region or 'tm' == region or 'wmn' == region or 'zmm_fail' == region or 'tm_fail' == region or 'wmn_fail' == region):
+    if 'zmm' in region or 'tm' in region or 'wmn' in region:
         factory.add_process(f('MET'),'Data',is_data=True,extra_cut=sel.metTrigger)
 	
-elif region in ['signal_scalar','signal_vector','signal_thq','signal_stdm','signal','signal_fail']:
+elif 'signal' in region:
     factory.add_process(f('MET'),'Data',is_data=True,extra_cut=sel.metTrigger)
     factory.add_process(f('ZtoNuNu'),'Zvv')
     factory.add_process(f('TTbar'),'ttbar')

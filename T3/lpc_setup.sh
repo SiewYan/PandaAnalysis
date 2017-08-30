@@ -2,7 +2,7 @@
 export PATH=${PATH}:${CMSSW_BASE}/src/PandaCore/bin/
 
 #submission number
-export SUBMIT_NAME="v_8026_0_4"
+export SUBMIT_NAME="v_8026_monoj"
 #scratch space
 export scratch_area="/uscms_data/d3"
 
@@ -10,15 +10,15 @@ export PANDA="${CMSSW_BASE}/src/PandaAnalysis"
 
 #export PANDA_CFG="http://t3serv001.mit.edu/~mcremone/histcatalog/test.cfg"
 #export PANDA_CFG="http://t3serv001.mit.edu/~bmaier/stuff/ZpA0.txt"
-export PANDA_CFG="http://t3serv001.mit.edu/~bmaier/stuff/ZpBaryonic.txt"
-#export PANDA_CFG="http://t3serv001.mit.edu/~snarayan/histcatalog/20170522_004.cfg"
+#export PANDA_CFG="http://t3serv001.mit.edu/~bmaier/stuff/ZpBaryonic.txt"
+export PANDA_CFG="http://t3serv001.mit.edu/~snarayan/histcatalog/20170522_004.cfg"
 export PANDA_FLATDIR="${scratch_area}/${USER}/panda/"${SUBMIT_NAME}"/flat/"
 
 mkdir -p $PANDA_FLATDIR
 
 #export SUBMIT_TMPL="skim_monojet_tmpl.py" ####
 #export SUBMIT_TMPL="skim_vbf_tmpl.py"
-export SUBMIT_TMPL="skim_monoJ_tmpl.py"                                                                                                                                            
+export SUBMIT_TMPL="skim_monoj_tmpl.py"                                                                                                                                            
 
 export SUBMIT_WORKDIR="${scratch_area}/${USER}/condor/"${SUBMIT_NAME}"/work/"
 export SUBMIT_LOGDIR="${scratch_area}/${USER}/condor/"${SUBMIT_NAME}"/logs/"
