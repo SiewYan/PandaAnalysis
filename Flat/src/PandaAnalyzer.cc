@@ -1378,7 +1378,7 @@ void PandaAnalyzer::Run() {
     vector<panda::Jet*> cleanedJets, isoJets, btaggedJets, centralJets;
     vector<int> btagindices;
     TLorentzVector vJet;
-    panda::Jet *jet1=0, *jet2=0, *jet3=0;
+    panda::Jet *jet1=0, *jet2=0, *jet3=0, *jet4=0, *jet5=0;
     panda::Jet *jot1=0, *jot2=0;
     panda::Jet *jotUp1=0, *jotUp2=0;
     panda::Jet *jotDown1=0, *jotDown2=0;
@@ -1458,6 +1458,18 @@ void PandaAnalyzer::Run() {
           gt->jet3Eta = jet.eta();
           gt->jet3Phi = jet.phi();
           gt->jet3CSV = csv;
+	} else if (centralJets.size()==4) {
+	  jet4 = &jet;
+          gt->jet4Pt = jet.pt();
+          gt->jet4Eta = jet.eta();
+          gt->jet4Phi = jet.phi();
+          gt->jet4CSV = csv;
+	} else if (centralJets.size()==5) {
+	  jet5 = &jet;
+          gt->jet5Pt = jet.pt();
+          gt->jet5Eta = jet.eta();
+          gt->jet5Phi = jet.phi();
+          gt->jet5CSV = csv;
 	}
 	
       }
@@ -1999,7 +2011,15 @@ void PandaAnalyzer::Run() {
         }else if (jet==centralJets.at(2)) {
 	  gt->jet3Flav = flavor;
           gt->jet3GenPt = genpt;
+	}else if (jet==centralJets.at(3)) {
+	  gt->jet4Flav = flavor;
+          gt->jet4GenPt = genpt;
+	}else if (jet==centralJets.at(4)) {
+	  gt->jet5Flav = flavor;
+          gt->jet5GenPt = genpt;
 	}
+
+
         if (isIsoJet) {
           if (jet==isoJets.at(0))
             gt->isojet1Flav = flavor;
