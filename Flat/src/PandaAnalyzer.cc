@@ -1375,7 +1375,7 @@ void PandaAnalyzer::Run() {
     tr.TriggerEvent("fatjet");
 
     // first identify interesting jets
-    vector<panda::Jet*> cleanedJets, isoJets, btaggedJets, centralJets;
+    vector<panda::Jet*> cleanedJets, isoJets, btaggedJets, centralJets, forwardJets;
     vector<int> btagindices;
     TLorentzVector vJet;
     panda::Jet *jet1=0, *jet2=0, *jet3=0, *jet4=0, *jet5=0;
@@ -1472,6 +1472,9 @@ void PandaAnalyzer::Run() {
           gt->jet5CSV = csv;
 	}
 	
+      }
+      else{
+	forwardJets.push_back(&jet);
       }
 
       if (doMonoH) {
@@ -2063,6 +2066,32 @@ void PandaAnalyzer::Run() {
 	}
         
       } // loop over jets
+
+      // Loop over forward jet, eta> 2.5
+      unsigned int nFJ = forwardJets.size();
+      for (unsigned int iFJ=0; iFJ!=nFJ; ++iFJ) {
+	panda::Jet *iforwardjet = centralJets.at(iFJ);
+	TLorentzVector forwardjet1(0.,0.,0.,0.);
+	forwardjet1.SetPxPyPzE(iforwardjet->px(),iforwardjet->py(),iforwardjet->pz(),iforwardjet->e());
+	for (unsigned int jFJ=1; jFJ!=nFJ; ++jFJ) {
+	  if (iFJ==jFJ) continue;
+	  panda::Jet *jforwardjet = centralJets.at(iFJ);
+	  TLorentzVector forwardjet2(0.,0.,0.,0.);
+	  forwardjet2.SetPxPyPzE(jforwardjet->px(),jforwardjet->py(),jforwardjet->pz(),jforwardjet->e());
+	  
+	  double dijetmass = (forwardjet1+forwardjet1).M();
+	  double deltaeta = iforwardjet->eta() - jforwardjet->eta();
+	  if (deltaeta > 4.2 && dijetmass>800 ){
+	    gt->forwjet1Pt = iforwardjet->pt();
+	    gt->forwjet1Phi = iforwardjet->phi();
+	    gt->forwjet1Eta = iforwardjet->eta();
+	    gt->forwjet2Pt = jforwardjet->pt();
+            gt->forwjet2Phi = jforwardjet->phi();
+            gt->forwjet2Eta = jforwardjet->eta();
+	    break;
+	  }
+	}
+      } // loop over forward jet
 
       //ENABLE 2-btag SF 
       // isojet with Low working points
