@@ -1978,6 +1978,12 @@ void PandaAnalyzer::Run() {
           isIsoJet = true;
         int flavor=0;
         float genpt=0;
+	float PX=0;
+	float PY=0;
+	float PZ=0;
+	float EN=0;
+	int status=0;
+	int Pdgid=0;
         for (auto& gen : event.genParticles) {
           int apdgid = abs(gen.pdgid);
           if (apdgid==0 || (apdgid>5 && apdgid!=21)) // light quark or gluon
@@ -1985,6 +1991,12 @@ void PandaAnalyzer::Run() {
           double dr2 = DeltaR2(jet->eta(),jet->phi(),gen.eta(),gen.phi());
           if (dr2<0.09) {
             genpt = gen.pt();
+	    PX = gen.px();
+	    PY = gen.py();
+	    PZ = gen.pz();
+	    EN = gen.e();
+	    //status = gen.status();
+	    Pdgid = apdgid;
             if (apdgid==4 || apdgid==5) {
               flavor=apdgid;
               break;
@@ -2008,12 +2020,36 @@ void PandaAnalyzer::Run() {
         if (jet==centralJets.at(0)) {
           gt->jet1Flav = flavor;
           gt->jet1GenPt = genpt;
+	  //Gen level of jets
+	  gt->genjet1px = PX;
+	  gt->genjet1py = PY;
+	  gt->genjet1pz = PZ;
+	  gt->genjet1en = EN;
+	  //gt->genjet1status = status;
+	  gt->genjet1pdgid = Pdgid;
+
         } else if (jet==centralJets.at(1)) {
           gt->jet2Flav = flavor;
           gt->jet2GenPt = genpt;
+
+	  gt->genjet2px = PX;
+          gt->genjet2py = PY;
+          gt->genjet2pz = PZ;
+          gt->genjet2en = EN;
+          //gt->genjet2status = status;
+          gt->genjet2pdgid = Pdgid;
+
         }else if (jet==centralJets.at(2)) {
 	  gt->jet3Flav = flavor;
           gt->jet3GenPt = genpt;
+
+	  gt->genjet3px = PX;
+          gt->genjet3py = PY;
+          gt->genjet3pz = PZ;
+          gt->genjet3en = EN;
+          //gt->genjet3status = status;
+          gt->genjet3pdgid = Pdgid;
+
 	}else if (jet==centralJets.at(3)) {
 	  gt->jet4Flav = flavor;
           gt->jet4GenPt = genpt;
