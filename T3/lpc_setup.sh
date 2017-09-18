@@ -2,8 +2,8 @@
 export PATH=${PATH}:${CMSSW_BASE}/src/PandaCore/bin/
 
 #submission number
-export SUBMIT_NAME="v_8026_monoj"
-
+export SUBMIT_NAME="v_8026_monoj_pho"
+#export SUBMIT_NAME="v_8026_monoj"
 #scratch space
 export scratch_area="/uscms_data/d3"
 
@@ -14,9 +14,9 @@ export PANDA="${CMSSW_BASE}/src/PandaAnalysis"
 #export PANDA_CFG="http://t3serv001.mit.edu/~bmaier/stuff/ZpBaryonic.txt"
 
 #normal dataset
-export PANDA_CFG="http://t3serv001.mit.edu/~snarayan/histcatalog/20170522_004.cfg"
+#export PANDA_CFG="http://t3serv001.mit.edu/~snarayan/histcatalog/20170522_004.cfg"
 #Photon
-#export PANDA_CFG="http://t3serv001.mit.edu/~mcremone/eoscatalog/20170905.cfg"
+export PANDA_CFG="http://t3serv001.mit.edu/~mcremone/eoscatalog/20170905.cfg"
 
 export PANDA_FLATDIR="${scratch_area}/${USER}/panda/"${SUBMIT_NAME}"/flat/"
 #export PANDA_FLATDIR="/uscms_data/d3/matteoc/panda/v_8026_0_4/flat/"
