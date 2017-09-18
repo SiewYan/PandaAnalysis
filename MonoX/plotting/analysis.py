@@ -30,8 +30,8 @@ import PandaCore.Tools.Functions
 #import PandaAnalysis.Monotop.TightSelection as sel
 #import PandaAnalysis.Monotop.OneFatJetSelection as sel
 #import PandaAnalysis.Monotop.CombinedBVetoSelection as sel
-#import PandaAnalysis.MonoX.Selection_bb as sel
-import PandaAnalysis.MonoX.MonoXSelection as sel                                                                                                                                                         
+import PandaAnalysis.MonoX.Selection_bb as sel
+#import PandaAnalysis.MonoX.MonoXSelection as sel                                                                                                                                                         
 from PandaCore.Drawers.plot_utility import *
 
 #reload(sys.modules['plot_utility'])
@@ -89,8 +89,8 @@ gjets         = Process('#gamma+jets',root.kGjets)
 data          = Process("Data",root.kData)
 signal        = Process('m_{V}=1.75 TeV, m_{#chi}=1 GeV',root.kSignal)
 #processes = [qcd,diboson,singletop,ttbar,wewk,zewk,wjets,zjets]
+#processes = [qcd,diboson,singletop,wjets,ttbar,zjets]
 processes = [qcd,diboson,singletop,wjets,ttbar,zjets]
-#processes = [zjets]
 
 if 'qcd' in region:
     processes = [diboson,singletop,wjets,ttbar,zjets,qcd]
@@ -104,8 +104,8 @@ else:
     #zjets.add_file(baseDir+'ZJets_nlo.root')
 wjets.add_file(baseDir+'WJets.root')
 diboson.add_file(baseDir+'Diboson.root')
-#ttbar.add_file(baseDir+'TTbar%s.root'%(args.tt));
-#singletop.add_file(baseDir+'SingleTop.root')
+ttbar.add_file(baseDir+'TTbar%s.root'%(args.tt));
+singletop.add_file(baseDir+'SingleTop.root')
 #ttg.add_file(baseDir+'TTbar_Photon.root');
 #singletopg.add_file(baseDir+'SingleTop_tG.root')
 if 'pho' in region:
