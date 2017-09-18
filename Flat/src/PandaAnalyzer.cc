@@ -1164,7 +1164,7 @@ void PandaAnalyzer::Run() {
     gt->pfUphi = vpfU.Phi();
 
     tr.TriggerEvent("recoils");
-
+    /*
     std::vector<int> LepIds = {11,13,15,-11,-13,-15};
     std::vector<int> NeuIds = {12,14,16,-12,-14,-16};
     std::vector<int> HadIds = {1,2,3,4,5,-1,-2,-3,-4,-5};
@@ -1185,7 +1185,7 @@ void PandaAnalyzer::Run() {
     } //looking for targets     
     
     tr.TriggerEvent("GenParticle analysis");
-
+    */
     panda::FatJet *fj1=0;
     gt->nFatjet=0;
     if (doFatjet) {
@@ -2137,7 +2137,7 @@ void PandaAnalyzer::Run() {
 	}
         
       } // loop over jets
-
+      /*
       // Loop over forward jet, eta> 2.5
       unsigned int nFJ = forwardJets.size();
       if ( nFJ > 2 ){
@@ -2166,7 +2166,7 @@ void PandaAnalyzer::Run() {
 	  }
 	} // loop over forward jet
       }
-      
+      */
       //ENABLE 2-btag SF 
       // isojet with Low working points
       EvalBTagSF(btagcands,sf_cent,GeneralTree::bCent,GeneralTree::bJet,false);
