@@ -201,10 +201,12 @@ class GeneralTree : public genericTree {
     float pfUWmagUp = -1;
     float pfUZmagUp = -1;
     float pfUAmagUp = -1;
+    float pfUWWmagUp = -1;
     float pfUmagUp = -1;
     float pfUWmagDown = -1;
     float pfUZmagDown = -1;
     float pfUAmagDown = -1;
+    float pfUWWmagDown = -1;
     float pfUmagDown = -1;
     int nJot = -1;
     float jot1Phi = -1;
@@ -278,6 +280,8 @@ class GeneralTree : public genericTree {
     float pfUZphi = -1;
     float pfUAmag = -1;
     float pfUAphi = -1;
+    float pfUWWmag = -1;
+    float pfUWWphi = -1;
     float pfUperp = -1;
     float pfUpara = -1;
     float pfUmag = -1;
@@ -290,6 +294,7 @@ class GeneralTree : public genericTree {
     float dphipfUW = -1;
     float dphipfUZ = -1;
     float dphipfUA = -1;
+    float dphipfUWW = -1;
     float dphipuppiU = -1;
     float dphipfU = -1;
     float trueGenBosonPt = -1;

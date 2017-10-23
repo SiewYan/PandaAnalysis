@@ -487,9 +487,9 @@ bool PandaAnalyzer::PassPreselection() {
   }
 
   float max_puppi = std::max({gt->puppimet, gt->puppiUZmag, gt->puppiUWmag, gt->puppiUAmag});
-  float max_pf = std::max({gt->pfmet, gt->pfUZmag, gt->pfUWmag, gt->pfUAmag});
-  float max_pfUp = std::max({gt->pfmetUp, gt->pfUZmagUp, gt->pfUWmagUp, gt->pfUAmagUp});
-  float max_pfDown = std::max({gt->pfmetDown, gt->pfUZmagDown, gt->pfUWmagDown, gt->pfUAmagDown});
+  float max_pf = std::max({gt->pfmet, gt->pfUZmag, gt->pfUWmag, gt->pfUAmag, gt->pfUWWmag});
+  float max_pfUp = std::max({gt->pfmetUp, gt->pfUZmagUp, gt->pfUWmagUp, gt->pfUAmagUp, gt->pfUWWmagUp});
+  float max_pfDown = std::max({gt->pfmetDown, gt->pfUZmagDown, gt->pfUWmagDown, gt->pfUAmagDown, gt->pfUWWmagDown});
 
   if (preselBits & kRecoil) {
     if ( max_pfDown>200 || max_pf>200 || max_pfUp>200 || max_puppi>200 ) {
@@ -1106,9 +1106,9 @@ void PandaAnalyzer::Run() {
     TLorentzVector vpfDown; vpfDown.SetPtEtaPhiM(gt->pfmetDown,0,gt->pfmetphi,0);
     TLorentzVector vObj1, vObj2;
     TLorentzVector vpuppiUW, vpuppiUZ, vpuppiUA;
-    TLorentzVector vpfUW, vpfUZ, vpfUA;
+    TLorentzVector vpfUW, vpfUZ, vpfUA, vpfUWW;
     TLorentzVector vpuppiU, vpfU;
-    int whichRecoil = 0; // -1=photon, 0=MET, 1,2=nLep
+    int whichRecoil = 0; // -1=photon, 0=MET, 1,2=nLep, 3 = WW
     if (gt->nLooseLep>0) {
       panda::Lepton *lep1 = looseLeps.at(0);
       vObj1.SetPtEtaPhiM(lep1->pt(),lep1->eta(),lep1->phi(),lep1->m());
@@ -1133,7 +1133,23 @@ void PandaAnalyzer::Run() {
 
         vpuppiU = vpuppiUZ; vpfU = vpfUZ;
         whichRecoil = 2;
-      } else {
+      } else if ( gt->nLooseLep>1 && ( (gt->looseLep1PdgId==11 && gt->looseLep2PdgId==-13) 
+				       || ( gt->looseLep1PdgId==-11 && gt->looseLep2PdgId==13 ) 
+				       || ( gt->looseLep1PdgId==13 && gt->looseLep2PdgId==-11 ) 
+				       || ( gt->looseLep1PdgId==-13 && gt->looseLep2PdgId==11 )  
+				       ) ){
+	// two W with opposite flavor
+	panda::Lepton *lep2 = looseLeps.at(1);
+	vObj2.SetPtEtaPhiM(lep2->pt(),lep2->eta(),lep2->phi(),lep2->m());
+
+        vpfUWW=vpfUW+vObj2; gt->pfUWWmag=vpfUWW.Pt(); gt->pfUWWphi=vpfUWW.Phi();
+
+        TLorentzVector vpfUWWUp = vpfUWUp+vObj2; gt->pfUWWmagUp = vpfUWWUp.Pt();
+        TLorentzVector vpfUWWDown = vpfUWDown+vObj2; gt->pfUWWmagDown = vpfUWWDown.Pt();
+	vpfU = vpfUWW;
+	whichRecoil = 3;
+      }
+      else {
         vpuppiU = vpuppiUW; vpfU = vpfUW;
         whichRecoil = 1;
       }
@@ -1408,6 +1424,7 @@ void PandaAnalyzer::Run() {
     gt->dphipuppiUW=999; gt->dphipfUW=999;
     gt->dphipuppiUZ=999; gt->dphipfUZ=999;
     gt->dphipuppiUA=999; gt->dphipfUA=999;
+    gt->dphipfUWW=999;
     float maxJetEta = (doVBF) ? 4.7 : 4.5;
     float maxIsoEta = (doMonoH) ? maxJetEta : 2.5;
     unsigned nJetDPhi = (doVBF) ? 4 : 4;
@@ -1519,6 +1536,7 @@ void PandaAnalyzer::Run() {
         gt->dphipfUA = std::min(fabs(vJet.DeltaPhi(vpfUA)),(double)gt->dphipfUA);
         gt->dphipfUW = std::min(fabs(vJet.DeltaPhi(vpfUW)),(double)gt->dphipfUW);
         gt->dphipfUZ = std::min(fabs(vJet.DeltaPhi(vpfUZ)),(double)gt->dphipfUZ);
+	gt->dphipfUWW = std::min(fabs(vJet.DeltaPhi(vpfUWW)),(double)gt->dphipfUWW);
       }
       // btags
       if (csv>0.5426) {
@@ -1607,6 +1625,10 @@ void PandaAnalyzer::Run() {
         gt->dphipuppiU = gt->dphipuppiUZ;
         gt->dphipfU = gt->dphipfUZ;
         break;
+      case 3:
+	//gt->dphipuppiU = gt->dphipuppiUZ;
+        gt->dphipfU = gt->dphipfUWW;
+	break;
       default: // impossible
         break;
     }
