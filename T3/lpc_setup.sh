@@ -2,8 +2,9 @@
 export PATH=${PATH}:${CMSSW_BASE}/src/PandaCore/bin/
 
 #submission number
-export SUBMIT_NAME="v_8026_monoj_pho"
-#export SUBMIT_NAME="v_8026_monoj"
+#export SUBMIT_NAME="v_8026_monoj_pho_v2"
+export SUBMIT_NAME="v_8026_monoj_v2"
+#export SUBMIT_NAME="testjob"
 #scratch space
 export scratch_area="/uscms_data/d3"
 
@@ -13,7 +14,7 @@ export PANDA="${CMSSW_BASE}/src/PandaAnalysis"
 #export PANDA_CFG="http://t3serv001.mit.edu/~bmaier/stuff/ZpA0.txt"
 #export PANDA_CFG="http://t3serv001.mit.edu/~bmaier/stuff/ZpBaryonic.txt"
 
-#normal dataset
+#Monojet dataset
 #export PANDA_CFG="http://t3serv001.mit.edu/~snarayan/histcatalog/20170522_004.cfg"
 #Photon
 export PANDA_CFG="http://t3serv001.mit.edu/~mcremone/eoscatalog/20170905.cfg"
@@ -88,6 +89,8 @@ echo ""
 # fitting                                                                                                                                                                                                   
 #export PANDA_FIT=/data/t3serv014/snarayan/CMSSW_7_4_7/
 #export PANDA_XSECS=/home/snarayan/cms/cmssw/analysis/MonoTop_Xsec/
+#export PANDA_XSECS=/eos/uscms/store/user/shoh/zprime_cross_section/
+#export PANDA_PROD=/eos/uscms/store/user/shoh/miniaod/
 #export PANDA_FITTING=${PANDA_FLATDIR}/fitting/
 #mkdir -p $PANDA_FITTING/scans/ $PANDA_FITTING/logs/
 
