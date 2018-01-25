@@ -84,7 +84,7 @@ def normalizeFast(fpath,opt):
         return
     PInfo(sname,'normalizing %s (%s) ...'%(fpath,opt))
     n = root.Normalizer();
-    n.NormalizeTree(fpath,xsec)
+    n.NormalizeTree(fpath,(xsec/2.))
 
 def merge(shortnames,mergedname):
     for shortname in shortnames:
@@ -135,6 +135,7 @@ def merge(shortnames,mergedname):
         inpath = '`xrdfs root://cmseos.fnal.gov ls -u ' + inbase + ' | grep \'' + shortname + '_\'`'
         print inpath
         hadd(inpath,'/uscmst1b_scratch/lpc1/3DayLifetime/%s/split/%s.root'%(user,shortname))
+        print "xsec = ", xsec
         if xsec>0:
             normalizeFast('/uscmst1b_scratch/lpc1/3DayLifetime/%s/split/%s.root'%(user,shortname),xsec)
     hadd(['/uscmst1b_scratch/lpc1/3DayLifetime/%s/split/%s.root'%(user,x) for x in shortnames],'/uscmst1b_scratch/lpc1/3DayLifetime/%s/merged/%s.root'%(user,mergedname))
