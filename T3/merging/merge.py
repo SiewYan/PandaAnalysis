@@ -84,7 +84,7 @@ def normalizeFast(fpath,opt):
         return
     PInfo(sname,'normalizing %s (%s) ...'%(fpath,opt))
     n = root.Normalizer();
-    n.NormalizeTree(fpath,(xsec/2.))
+    n.NormalizeTree(fpath,xsec)
 
 def merge(shortnames,mergedname):
     for shortname in shortnames:
