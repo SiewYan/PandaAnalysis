@@ -1,0 +1,15 @@
+metFilter==1 
+nFatjet==1
+fj1Pt>200
+nTau==0
+Sum$(jetPt>30 && jetIso)<2
+pfUZmag>200
+dphipfUZ>0.4
+nLooseElectron==0
+nLoosePhoton==0
+nTau==0
+nLooseMuon==2
+nTightLep>0
+60<diLepMass && diLepMass<120 
+isojetNBtags==0
+fj1DoubleCSV>0.75

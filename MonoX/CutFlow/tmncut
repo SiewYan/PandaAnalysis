@@ -1,0 +1,16 @@
+metFilter==1
+nFatjet==1
+fj1Pt>200
+nTau==0
+Sum$(jetPt>30 && jetIso)<2
+nLoosePhoton==0
+nTau==0 
+nLooseLep==1 
+nTightMuon==1
+pfUWmag>200
+dphipfUW>0.4
+mT<160
+fj1MSD>50
+fj1MSD<75
+isojetNBtags==1
+fj1DoubleCSV>0.75 

@@ -2,14 +2,25 @@
 export PATH=${PATH}:${CMSSW_BASE}/src/PandaCore/bin/
 
 #submission number
-export SUBMIT_NAME="v_8026_monoj_v2"
+#export SUBMIT_NAME="v_8029_DarkHiggs_monozp"
+#export SUBMIT_NAME="v_8029_DarkHiggs_mc" 
+export SUBMIT_NAME="v_8029_DarkHiggs_v2"
+#export SUBMIT_NAME="v_8029_DarkHiggs_missing"
+#export SUBMIT_NAME="v_8029_ttbar_test"
 #scratch space
 export scratch_area="/uscms_data/d3"
 export PANDA="${CMSSW_BASE}/src/PandaAnalysis"
 #cfg file
-export PANDA_CFG="http://t3serv001.mit.edu/~mcremone/eoscatalog/20170905.cfg"
+#export PANDA_CFG="http://home.fnal.gov/~shoh/DarkHiggs_cfg/DarkHiggs_8029.cfg"
+#export PANDA_CFG="http://home.fnal.gov/~shoh/DarkHiggs_cfg/versionControl/panda008/signal/DarkHiggs_8029.cfg"
+#export PANDA_CFG="http://home.fnal.gov/~shoh/DarkHiggs_cfg/versionControl/panda008/signal/monozp/DarkHiggs_8029.cfg"
+#export PANDA_CFG="http://t3serv001.mit.edu/~snarayan/histcatalog/20171220_common008.cfg"
+export PANDA_CFG="http://home.fnal.gov/~shoh/DarkHiggs_cfg/versionControl/panda008/signal/missing/v1/DarkHiggs_8029.cfg"
+#export PANDA_CFG="http://home.fnal.gov/~shoh/panda008/test_ttbar_powheg.cfg"
+#export PANDA_CFG="http://home.fnal.gov/~shoh/DarkHiggs_cfg/versionControl/panda008/20171220_common008.cfg"
+
 #skim
-export SUBMIT_TMPL="skim_monoj_tmpl.py"
+export SUBMIT_TMPL="skim_darkhiggs_tmpl.py"
 #panda's 
 export PANDA_FLATDIR="${scratch_area}/${USER}/panda/"${SUBMIT_NAME}"/flat/"
 export SUBMIT_OUTDIR="/store/user/${USER}/panda/"${SUBMIT_NAME}"/batch/"
