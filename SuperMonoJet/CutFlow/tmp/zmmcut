@@ -1,0 +1,16 @@
+metFilter==1
+!(nFatjet==1 && fj1Pt>200)
+jet1Pt>100
+abs(jet1Eta)<2.5
+nTau==0
+(abs(calomet-pfmet)/pfUZmag)<0.5
+pfUZmag>250
+dphipfUZ>0.5
+nLooseElectron==0
+nLoosePhoton==0
+nLooseMuon==2
+nTightLep>0
+60<diLepMass && diLepMass<120
+Sum$(jetCSV>0.8484 && abs(jetEta)<2.5)==0
+
+#35800*sf_pu*sf_tt*normalizedWeight*sf_lepID*sf_lepIso*sf_lepTrack*sf_ewkV*sf_qcdV*sf_metTrig*sf_Medbtag0

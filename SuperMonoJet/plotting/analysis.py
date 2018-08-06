@@ -99,8 +99,12 @@ def normalPlotting(region):
     #singletopg    = Process('t#gamma',root.kST,root.kRed-9)
     qcd           = Process("QCD",root.kQCD,None,root.kMagenta-10)
     #gjets         = Process('#gamma+jets',root.kGjets)
-    data          = Process("Data",root.kData)
-    #signal        = Process('m_{V}=1.75 TeV, m_{#chi}=1 GeV',root.kSignal)
+    data           = Process("Data",root.kData)
+    signal1        = Process('m_{Zprime}=1 TeV, m_{hs}=90 GeV, m_{#chi}=50 GeV',root.kSignal)
+    #signal2        = Process('m_{Zprime}=1 TeV, m_{hs}=90 GeV, m_{#chi}=100 GeV',root.kSignal)
+    #signal3        = Process('m_{Zprime}=1 TeV, m_{hs}=90 GeV, m_{#chi}=250 GeV',root.kSignal)
+    #signal4        = Process('m_{Zprime}=1 TeV, m_{hs}=90 GeV, m_{#chi}=400 GeV',root.kSignal)
+
     processes = [qcd,diboson,singletop,wjets,ttbar,zjets]
 
     if 'qcd' in region:
@@ -115,7 +119,13 @@ def normalPlotting(region):
         processes = [qcd,diboson,singletop,zjets,ttbar,wjets]
     ### ASSIGN FILES TO PROCESSES ###
     if 'signal' in region or 'qcd' in region:
-        processes = [qcd,zjets,singletop,ttbar,diboson,wjets,znunu]
+
+        signal1.add_file(baseDir+'BBbarDM_MZprime-1000_Mhs-90_Mchi-50.root')
+        #signal2.add_file(baseDir+'BBbarDM_MZprime-1000_Mhs-90_Mchi-100.root')
+        #signal3.add_file(baseDir+'BBbarDM_MZprime-1000_Mhs-90_Mchi-250.root')
+        #signal4.add_file(baseDir+'BBbarDM_MZprime-1000_Mhs-90_Mchi-400.root')
+
+        processes = [qcd,zjets,singletop,ttbar,diboson,wjets,znunu,signal1]
         znunu.add_file(baseDir+'ZtoNuNu.root')
 
     zjets.add_file(baseDir+'ZJets.root')
@@ -158,22 +168,23 @@ def normalPlotting(region):
        #print "processess considered -> ", p
         plot.add_process(p)
 
-    recoilBins = [250,270,350,475,1000]
+    #recoilBins = [250,270,350,475,1000]
+    recoilBins = [250,280,310,340,370,400,430,470,510,550,590,640,690,740,790,840,900,960,1020,1090,1160,1250,1400]
     fatjetBins = [25,75,100,150,600]
     nRecoilBins = len(recoilBins)-1
 
     ### CHOOSE DISTRIBUTIONS, LABELS ###
-    if 'signal' in region or 'qcd' in region:
+    if 'signal' in region or 'qcd' in region or 'inclusive' in region:
         recoil=VDistribution("pfmet",recoilBins,"PF MET [GeV]","Events/GeV")
 
     elif any([x in region for x in ['wen','wmn','ten','tmn']]):
         recoil=VDistribution("pfUWmag",recoilBins,"PF U(%s) [GeV]"%(lep),"Events/GeV")
         #plot.add_distribution(FDistribution('mT',0,500,25,'Transverse Mass of W [GeV]','Events'))
         if not lep=="e":
-            plot.add_distribution(FDistribution('muonPt[0]',0,400,15,'Leading %s p_{T} [GeV]'%lep,'Events/25 GeV'))
+            plot.add_distribution(FDistribution('muonPt[0]',0,600,60,'Leading %s p_{T} [GeV]'%lep,'Events/10 GeV'))
             plot.add_distribution(FDistribution('muonEta[0]',-2.5,2.5,10,'%s #eta'%lep,'Events'))
         else:
-            plot.add_distribution(FDistribution('electronPt[0]',0,400,15,'Leading %s p_{T} [GeV]'%lep,'Events/25 GeV'))
+            plot.add_distribution(FDistribution('electronPt[0]',0,600,60,'Leading %s p_{T} [GeV]'%lep,'Events/10 GeV'))
             plot.add_distribution(FDistribution('electronEta[0]',-2.5,2.5,10,'%s #eta'%lep,'Events'))
         plot.add_distribution(FDistribution('dphipfUW',0,3.14,10,'min#Delta#phi(AK4 jet,E_{T}^{miss})','Events'))
         
@@ -181,10 +192,10 @@ def normalPlotting(region):
         recoil=VDistribution("pfUZmag",recoilBins,"PF U(%s%s) [GeV]"%(lep,lep),"Events/GeV")
         #plot.add_distribution(FDistribution('diLepMass',60,120,20,'m_{ll} [GeV]','Events/3 GeV'))
         if not lep=="e":
-            plot.add_distribution(FDistribution('muonPt[0]',0,400,15,'Leading %s p_{T} [GeV]'%lep,'Events/25 GeV'))
+            plot.add_distribution(FDistribution('muonPt[0]',0,600,60,'Leading %s p_{T} [GeV]'%lep,'Events/10 GeV'))
             plot.add_distribution(FDistribution('muonEta[0]',-2.5,2.5,10,'%s #eta'%lep,'Events'))
         else:
-            plot.add_distribution(FDistribution('electronPt[0]',0,400,15,'Leading %s p_{T} [GeV]'%lep,'Events/25 GeV'))
+            plot.add_distribution(FDistribution('electronPt[0]',0,600,60,'Leading %s p_{T} [GeV]'%lep,'Events/10 GeV'))
             plot.add_distribution(FDistribution('electronEta[0]',-2.5,2.5,10,'%s #eta'%lep,'Events'))
         plot.add_distribution(FDistribution('dphipfUZ',0,3.14,10,'min#Delta#phi(AK4 jet,E_{T}^{miss})','Events'))
 
@@ -250,7 +261,11 @@ def fromLimit(region):
     qcd           = Process('QCD',root.kQCD,'QCD_'+region,root.kMagenta-10)
     #gjets         = Process('#gamma+jets',root.kGjets,args.region)
     data          = Process("Data",root.kData,'Data_'+region)
-    #signal        = Process('m_{V}=1.75 TeV, m_{#chi}=1 GeV',root.kSignal,args.region)
+    signal1        = Process('m_{Zprime}=1 TeV, m_{hs}=90 GeV, m_{#chi}=50 GeV',root.kSignal)
+    #signal2        = Process('m_{Zprime}=1 TeV, m_{hs}=90 GeV, m_{#chi}=100 GeV',root.kSignal)
+    #signal3        = Process('m_{Zprime}=1 TeV, m_{hs}=90 GeV, m_{#chi}=250 GeV',root.kSignal)               
+    #signal4        = Process('m_{Zprime}=1 TeV, m_{hs}=90 GeV, m_{#chi}=400 GeV',root.kSignal)  
+
     processes = [qcd,diboson,singletop,wjets,ttbar,zjets]
 
     
@@ -262,6 +277,11 @@ def fromLimit(region):
         processes = [qcd,diboson,singletop,zjets,ttbar,wjets]
     ### ASSIGN FILES TO PROCESSES ###
     if 'signal' in region or 'qcd' in region:
+
+        signal1.add_file(baseDir+'BBbarDM_MZprime-1000_Mhs-90_Mchi-50.root')
+        #signal2.add_file(baseDir+'BBbarDM_MZprime-1000_Mhs-90_Mchi-100.root')             
+        #signal3.add_file(baseDir+'BBbarDM_MZprime-1000_Mhs-90_Mchi-250.root')
+        #signal4.add_file(baseDir+'BBbarDM_MZprime-1000_Mhs-90_Mchi-400.root')     
         processes = [qcd,zjets,singletop,ttbar,diboson,wjets,znunu]
 
     for p in processes:

@@ -1,0 +1,41 @@
+INFO    [PandaCore.Tools.Load                    ]: Loading libPandaAnalysisFlat.so
+INFO    [PandaAnalysis.Flat.analysis             ]: Summary of analysis boosted:
+INFO    [PandaAnalysis.Flat.analysis             ]:                      ak8 = False
+INFO    [PandaAnalysis.Flat.analysis             ]:          applyMCTriggers = False
+INFO    [PandaAnalysis.Flat.analysis             ]:           bjetRegression = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                  boosted = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                    boson = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                  btagSFs = True
+INFO    [PandaAnalysis.Flat.analysis             ]:              btagWeights = True
+INFO    [PandaAnalysis.Flat.analysis             ]:       complicatedLeptons = False
+INFO    [PandaAnalysis.Flat.analysis             ]:       complicatedPhotons = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                   fatjet = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                 firstGen = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                  genOnly = False
+INFO    [PandaAnalysis.Flat.analysis             ]:               hfCounting = True
+INFO    [PandaAnalysis.Flat.analysis             ]:            jetFlavorJets = True
+INFO    [PandaAnalysis.Flat.analysis             ]:         jetFlavorPartons = True
+INFO    [PandaAnalysis.Flat.analysis             ]:               lepmonotop = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                  monojet = False
+INFO    [PandaAnalysis.Flat.analysis             ]:              processType = False
+INFO    [PandaAnalysis.Flat.analysis             ]:               puppi_jets = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                recluster = False
+INFO    [PandaAnalysis.Flat.analysis             ]:             reclusterGen = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                   recoil = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                 rerunJES = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                 resolved = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                  useCMVA = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                  varyJES = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                      vbf = False
+INFO    [PandaAnalyzer::Run::Progress            ]:  0.00% (0/1000)                         
+INFO    [PandaAnalyzer::Run::Progress            ]: 10.00% (100/1000)                       
+INFO    [PandaAnalyzer::Run::Progress            ]: 20.00% (200/1000)                       
+INFO    [PandaAnalyzer::Run::Progress            ]: 30.00% (300/1000)                       
+INFO    [PandaAnalyzer::Run::Progress            ]: 40.00% (400/1000)                       
+INFO    [PandaAnalyzer::Run::Progress            ]: 50.00% (500/1000)                       
+INFO    [PandaAnalyzer::Run::Progress            ]: 60.00% (600/1000)                       
+INFO    [PandaAnalyzer::Run::Progress            ]: 70.10% (701/1000)                       
+INFO    [PandaAnalyzer::Run::Progress            ]: 80.10% (801/1000)                       
+INFO    [PandaAnalyzer::Run::Progress            ]: 90.10% (901/1000)                       
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task             GetEntry called   999 times, average time = 86.177 us, total time = 86.091 ms
+0

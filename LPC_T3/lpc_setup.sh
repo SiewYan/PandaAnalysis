@@ -26,7 +26,8 @@ export PANDA="${CMSSW_BASE}/src/PandaAnalysis"
 #cfg file
 #export PANDA_CFG="http://sundleeb.web.cern.ch/sundleeb/panda_config/20180710.cfg"
 ##DY-400-600
-export PANDA_CFG="http://sundleeb.web.cern.ch/sundleeb/panda_config/20180713.cfg"
+#export PANDA_CFG="http://sundleeb.web.cern.ch/sundleeb/panda_config/20180713.cfg"
+export PANDA_CFG="http://home.fnal.gov/~shoh//DarkHiggs_cfg/versionControl/panda009/COMPLETE-BASED-ON-UI/DarkHiggs-MZprim-1K_Mhs-90_Mchi-50-100-250-400.cfg"
 
 #skim
 export SUBMIT_TMPL="skim_${ANALYSIS}_tmpl.py"

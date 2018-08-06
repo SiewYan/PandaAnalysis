@@ -1,0 +1,11 @@
+metFilter==1
+nFatjet==1
+fj1Pt>200
+nTau==0
+Sum$(jetPt>30 && jetIso)<2
+nLooseLep==0
+nLooseElectron==0
+nLoosePhoton==0
+pfmet>250
+dphipfmet>0.4
+fj1DoubleCSV>0.75

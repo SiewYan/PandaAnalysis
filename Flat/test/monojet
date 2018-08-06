@@ -1,0 +1,58 @@
+INFO    [PandaCore.Tools.Load                    ]: Loading libPandaAnalysisFlat.so
+INFO    [PandaAnalysis.Flat.analysis             ]: Summary of analysis monojet:
+INFO    [PandaAnalysis.Flat.analysis             ]:                      ak8 = False
+INFO    [PandaAnalysis.Flat.analysis             ]:          applyMCTriggers = False
+INFO    [PandaAnalysis.Flat.analysis             ]:           bjetRegression = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                  boosted = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                    boson = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                  btagSFs = True
+INFO    [PandaAnalysis.Flat.analysis             ]:              btagWeights = True
+INFO    [PandaAnalysis.Flat.analysis             ]:       complicatedLeptons = False
+INFO    [PandaAnalysis.Flat.analysis             ]:       complicatedPhotons = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                   fatjet = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                 firstGen = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                  genOnly = False
+INFO    [PandaAnalysis.Flat.analysis             ]:               hfCounting = True
+INFO    [PandaAnalysis.Flat.analysis             ]:            jetFlavorJets = True
+INFO    [PandaAnalysis.Flat.analysis             ]:         jetFlavorPartons = True
+INFO    [PandaAnalysis.Flat.analysis             ]:               lepmonotop = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                  monojet = True
+INFO    [PandaAnalysis.Flat.analysis             ]:              processType = False
+INFO    [PandaAnalysis.Flat.analysis             ]:               puppi_jets = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                recluster = False
+INFO    [PandaAnalysis.Flat.analysis             ]:             reclusterGen = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                   recoil = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                 rerunJES = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                 resolved = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                  useCMVA = True
+INFO    [PandaAnalysis.Flat.analysis             ]:                  varyJES = False
+INFO    [PandaAnalysis.Flat.analysis             ]:                      vbf = False
+INFO    [PandaAnalyzer::Run::Progress            ]:  0.00% (0/100)                          
+INFO    [PandaAnalyzer::Run::Progress            ]: 10.00% (10/100)                         
+INFO    [PandaAnalyzer::Run::Progress            ]: 20.00% (20/100)                         
+INFO    [PandaAnalyzer::Run::Progress            ]: 30.00% (30/100)                         
+INFO    [PandaAnalyzer::Run::Progress            ]: 40.00% (40/100)                         
+INFO    [PandaAnalyzer::Run::Progress            ]: 50.00% (50/100)                         
+INFO    [PandaAnalyzer::Run::Progress            ]: 60.00% (60/100)                         
+INFO    [PandaAnalyzer::Run::Progress            ]: 71.00% (71/100)                         
+INFO    [PandaAnalyzer::Run::Progress            ]: 81.00% (81/100)                         
+INFO    [PandaAnalyzer::Run::Progress            ]: 91.00% (91/100)                         
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task             GetEntry called    99 times, average time = 54.338 us, total time = 5.379 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task           initialize called    51 times, average time =  2.333 us, total time = 0.119 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task                  met called    51 times, average time =  1.538 us, total time = 0.078 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task              leptons called    51 times, average time =  1.281 us, total time = 0.065 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task              photons called    51 times, average time =  1.066 us, total time = 0.054 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task              recoils called    51 times, average time =  2.618 us, total time = 0.134 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task        fatjet basics called    51 times, average time =  0.884 us, total time = 0.045 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task               fatjet called    51 times, average time =  2.828 us, total time = 0.144 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task                 jets called    51 times, average time =  5.255 us, total time = 0.268 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task                 taus called    51 times, average time =  0.977 us, total time = 0.050 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task               presel called    51 times, average time =  1.267 us, total time = 0.065 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task         gen matching called    51 times, average time =  1.131 us, total time = 0.058 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task  fatjet gen-matching called    51 times, average time =  1.169 us, total time = 0.060 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task     ak4 gen-matching called    51 times, average time =  7.255 us, total time = 0.370 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task             triggers called    51 times, average time = 11.870 us, total time = 0.605 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task           lepton SFs called    51 times, average time =  1.075 us, total time = 0.055 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task    qcd uncertainties called    51 times, average time =  1.127 us, total time = 0.057 ms
+DEBUG   [PandaAnalyzer::Run::Time                ]: Task                 fill called    51 times, average time = 36.244 us, total time = 1.848 ms
+1

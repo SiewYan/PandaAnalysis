@@ -15,7 +15,8 @@ parser.add_argument('--input',metavar='input',type=str,default=getenv('PANDA_FLA
 
 args = parser.parse_args()
 nddt = args.ddt
-region = args.region  
+region = args.region
+print region
 #out_region = args.region
 #region = out_region.split('_')[0]
 if region=='test':
@@ -187,11 +188,6 @@ elif 'signal' in region:
     factory.add_process(f('SingleTop'),'ST')
     factory.add_process(f('Diboson'),'Diboson')
     factory.add_process(f('QCD'),'QCD')
-
-    factory.add_process(f('BBbarDM_MZprime-1000_Mhs-90_Mchi-50'),'hsDM_1000_90_50')
-    factory.add_process(f('BBbarDM_MZprime-1000_Mhs-90_Mchi-100'),'hsDM_1000_90_100')
-    factory.add_process(f('BBbarDM_MZprime-1000_Mhs-90_Mchi-250'),'hsDM_1000_90_250')
-    factory.add_process(f('BBbarDM_MZprime-1000_Mhs-90_Mchi-400'),'hsDM_1000_90_400')
 
 forestDir = basedir + '/limits/'
 os.system('mkdir -p %s'%(forestDir))
