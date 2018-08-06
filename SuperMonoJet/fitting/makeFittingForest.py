@@ -10,11 +10,13 @@ from glob import glob
 import argparse
 parser = argparse.ArgumentParser(description='make forest')
 parser.add_argument('--region',metavar='region',type=str,default=None)
-parser.add_argument('--ddt',metavar='ddt',type=bool,default=False)
+parser.add_argument('--analysis',metavar='analysis',type=str,default=None)
+#parser.add_argument('--ddt',metavar='ddt',type=bool,default=False)
 parser.add_argument('--input',metavar='input',type=str,default=getenv('PANDA_FLATDIR'))
 
 args = parser.parse_args()
-nddt = args.ddt
+nddt = False
+drddt= False
 region = args.region  
 #out_region = args.region
 #region = out_region.split('_')[0]
@@ -28,8 +30,21 @@ argv=[]
 import PandaAnalysis.Flat.fitting_forest as forest 
 from PandaCore.Tools.Misc import *
 import PandaCore.Tools.Functions # kinematics
+<<<<<<< HEAD
 #import PandaAnalysis.MonoX.MonoXSelection as sel
 import PandaAnalysis.SuperMonoJet.BoostedSelection as sel
+=======
+import PandaAnalysis.SuperMonoJet.BoostedSelection as sel
+
+if args.analysis == "boosted":
+    import PandaAnalysis.SuperMonoJet.BoostedSelection as sel                            
+    nddt = True
+if args.analysis == "resolved":
+    import PandaAnalysis.SuperMonoJet.ResolvedSelection as sel
+    drddt = True
+if args.analysis == "monojet":
+    import PandaAnalysis.SuperMonoJet.MonojetSelection as sel
+>>>>>>> 5fef46f93796011b694e158c0539df8ad0070e22
 
 basedir = args.input
 lumi = 35900
@@ -140,6 +155,12 @@ if nddt:
     vmap['n2'] = 'fj1ECFN_2_3_10/pow(fj1ECFN_1_2_10,2.00)'
     vmap['doubleb'] = 'fj1DoubleCSV'
 
+if drddt:
+    vmap['fjpt'] = 'bosonpt'
+    vmap['fjmass'] = 'bosonm'
+    vmap['n2'] = 'bosondr'
+    vmap['doubleb'] = 'min(jetCSV[bosonjtidx[0]],jetCSV[bosonjtidx[1]])'
+
 #weights
 weights = {'nominal' : sel.weights[region]%lumi}
 weights.update(shift_btags())
@@ -199,5 +220,8 @@ factory.run(forestDir+'/fittingForest_%s.root'%region)
 
 #Computing n2ddt variables in the ntuples stored inside the basedir directory
 if nddt:
+    print 'adding n2ddt'
     addN2DDT(forestDir+'/fittingForest_%s.root'%region)
-
+if drddt:
+    print 'adding drddt'
+    addN2DDT(forestDir+'/fittingForest_%s.root'%region)

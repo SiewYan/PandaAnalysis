@@ -180,7 +180,7 @@ void PandaAnalyzer::JetBasics()
         if (analysis->vbf || analysis->complicatedLeptons)
           JetVBFBasics(jet);
 
-        if (analysis->boosted || analysis->boson) {
+        if (analysis->boosted || analysis->boson || analysis->monojet || analysis->lepmonotop) {
           JetHbbBasics(jet);
           if (analysis->bjetRegression)
             JetBRegressionInfo(jet);
@@ -262,6 +262,7 @@ void PandaAnalyzer::JetHbbBasics(panda::Jet& jet)
   gt->jetPtDown[N]=jet.ptCorrDown;
   gt->jetEta[N]=jet.eta();
   gt->jetPhi[N]=jet.phi();
+  gt->jetM[N]=jet.m();
   gt->jetE[N]=jet.e();
   gt->jetCSV[N]=csv;
   gt->jetCMVA[N]=cmva;
@@ -360,9 +361,9 @@ void PandaAnalyzer::IsoJet(panda::Jet& jet)
       gt->isojet2Pt = jet.pt();
       gt->isojet2CSV = jet.csv;
     }
-      gt->jetIso[cleanedJets.size()-1]=1;
+    gt->jetIso[cleanedJets.size()-1]=1;
   } else {
-      gt->jetIso[cleanedJets.size()-1]=1;
+    gt->jetIso[cleanedJets.size()-1]=0;
   }
   tr->TriggerSubEvent("iso jets");
 }
@@ -686,8 +687,6 @@ void PandaAnalyzer::JetBosonReco()
 
 
   }
-  
-  tr->TriggerEvent("monohiggs");
 }
 
 
